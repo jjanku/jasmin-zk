@@ -1062,10 +1062,7 @@ module M(SC:Syscall_t) = {
     aux <- ctr;
     p <- aux;
     leakages <- LeakAddr([]) :: leakages;
-    aux <- (p `&` (W64.of_int 63));
-    p <- aux;
-    leakages <- LeakAddr([]) :: leakages;
-    aux <- (bit `>>` (truncateu8 p));
+    aux <- (bit `>>` (truncateu8 (p `&` (W64.of_int 63))));
     bit <- aux;
     leakages <- LeakAddr([]) :: leakages;
     aux <- (bit `&` (W64.of_int 1));

@@ -214,7 +214,7 @@ qed.
 
 
 (* ith_bit64 leakages  *)
-op ith_bit64_t : leakages_t = LeakAddr [] :: LeakAddr [] :: LeakAddr [] :: LeakAddr [] :: LeakAddr [] :: [].
+op ith_bit64_t : leakages_t = LeakAddr [] :: LeakAddr [] :: LeakAddr [] :: LeakAddr [] :: [].
 
 lemma ith_bit64_leakages start_l :
    hoare [ M(Syscall).ith_bit64 : M.leakages = start_l 

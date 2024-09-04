@@ -493,8 +493,7 @@ module IB = {
     var p:W64.t;    
     bit <- k;
     p <- ctr;
-    p <- (p `&` (W64.of_int 63));
-    bit <- (bit `>>` (truncateu8 p));
+    bit <- (bit `>>` (truncateu8 (p `&` (W64.of_int 63))));
     bit <- (bit `&` (W64.of_int 1));
     return (bit);
   }  
