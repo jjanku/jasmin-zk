@@ -1,0 +1,10 @@
+[general]
+provers = CVC4
+provers = Z3
+provers = Alt-Ergo
+
+timeout = 20
+
+rdirs = ./proof/
+rdirs = ./easycrypt-zk-code/
+idirs = Jasmin:./proof/eclib/
