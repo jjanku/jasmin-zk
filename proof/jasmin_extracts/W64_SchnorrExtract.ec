@@ -1,5 +1,7 @@
 require import AllCore IntDiv CoreMap List Distr.
-from Jasmin require import JModel.
+from Jasmin require import JModel_x86.
+import SLH64.
+
 
 require import Array1 Array32 Array64 Array128 Array256.
 require import WArray1 WArray256 WArray512 WArray1024.
@@ -937,11 +939,11 @@ module M(SC:Syscall_t) = {
     while ((! cf)) {
       _byte_p <- byte_p;
       aux <@ SC.randombytes_256 ((Array256.init (fun i_0 => get8
-                                 (WArray256.init64 (fun i_0 => _byte_p.[i_0]))
+                                 (WArray256.init64 (fun i_0 => (_byte_p).[i_0]))
                                  i_0)));
       byte_p <-
       (Array32.init (fun i_0 => get64
-      (WArray256.init8 (fun i_0 => aux.[i_0])) i_0));
+      (WArray256.init8 (fun i_0 => (aux).[i_0])) i_0));
       byte_q <@ bn_copy (byte_p);
       (cf, byte_q) <@ bn_subc (byte_q, byte_z);
       i <- (i + 1);
