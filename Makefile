@@ -90,7 +90,6 @@ extract_all $(EXTRACTED_FILES) : src/schnorr_protocol.jazz src/constants.jazz Ma
 	mkdir proof/jasmin_extracts
 	$(JASMIN)     $(EXTRACTED_FUNCTIONS) -oec proof/jasmin_extracts/W64_SchnorrExtract.ec    -oecarray proof/jasmin_extracts src/schnorr_protocol.jazz
 	$(JASMIN) -CT $(EXTRACTED_FUNCTIONS) -oec proof/jasmin_extracts/W64_SchnorrExtract_ct.ec -oecarray proof/jasmin_extracts src/schnorr_protocol.jazz
-	$(JASMIN) -safety $(EXTRACTED_FUNCTIONS) -oec proof/jasmin_extracts/W64_SchnorrExtract_mem.ec -oecarray proof/jasmin_extracts src/schnorr_protocol.jazz
 
 src/constants.jazz : src/constants.py
 	make -C src constants.jazz
