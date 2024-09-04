@@ -104,7 +104,7 @@ call ith_bit_lemma_cspec.
 inline*. wp.  simplify.
 skip. progress.
 have f1 : to_uint i{1} < W64xN.modulusR. smt(@W64xN).
-have -> : (to_uint i{1} - 1) %% W64xN.modulusR = (to_uint i{1} - 1). smt(@W64xN).
+have -> : (to_uint i{1} - 1) %% W64xN.modulusR = (to_uint i{1} - 1). smt().
 rewrite to_uintD. 
 rewrite to_uintN. 
 smt(@W64).
@@ -284,7 +284,7 @@ qed.
 
 lemma exp_same_comp (x : zmod) : forall n, 0 <= n => (x ^ n) = (x ^ n)%Exp.
 apply intind. progress.
-smt(@Zp @Int @Ring).
+rewrite /(^). simplify. rewrite iterop0; trivial.
 progress. rewrite exp_unfold. auto.
 rewrite H0.
 smt(@Exp).
@@ -387,7 +387,7 @@ conseq (bn_expm_correct_ph  r m x n).
 progress. rewrite - H. auto. rewrite /R. 
 rewrite /Ri.
 have  : 0 <= (4 ^ (dnlimbs * nlimbs) %/ p ) < W64x2N.modulusR.
-rewrite W64x2NmodulusR_val. smt(@Ring @Zp).
+rewrite W64x2NmodulusR_val. smt(Zp.ge2_p).
 rewrite nasty_id.
 rewrite /r.
 move => q. apply W64x2N.R.bn_inj.

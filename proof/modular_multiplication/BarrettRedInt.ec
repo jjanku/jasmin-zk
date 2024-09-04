@@ -158,7 +158,7 @@ have h1 : (floor (a%r / b%r))%r <= a%r / b%r.
 smt (floor_bound).
 progress. 
 have h2 : (a%r / b%r) * b%r <= a%r. smt().
-smt(@Real).
+smt().
 have h1 : a%r < (floor (a%r / b%r) + 1)%r * b%r.
 smt (floor_bound).
 progress. 

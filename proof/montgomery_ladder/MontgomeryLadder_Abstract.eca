@@ -72,7 +72,7 @@ lemma exp_prop3'' x : forall i, 0 <= i => x ^ (1 + i) = x ^ i *** x.
 apply intind. progress. 
 rewrite /(^).  
 simplify.  smt(@Int op_id').
-progress. smt(@Int op_assoc).
+progress. smt(iteropi op_assoc).
 qed.
 
 

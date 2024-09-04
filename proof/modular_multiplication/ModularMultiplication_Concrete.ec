@@ -36,7 +36,7 @@ move => q.
 elim r3.  move => q2. rewrite - q2. elim H1. progress.
 have ->: valR r1.`4 = (W64xN.R2.bnk dnlimbs r1.`4). auto.
 rewrite H5. 
-  have pop : forall (x y z : int), 0 <= x < z /\ 0 <= y < z => x * y < z * z. smt(@Int).
+  have pop : forall (x y z : int), 0 <= x < z /\ 0 <= y < z => x * y < z * z. smt(ltr_pmul).
   apply pop.
 progress.
 smt(@W64xN).

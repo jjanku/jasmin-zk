@@ -19,7 +19,7 @@ byphoare. proc. auto. auto. auto. qed.
 
 lemma kok (a b c : real) : 0%r <= a => 0%r < b => 1%r < c =>
  a <= b / c => a < b.
-smt(@Real).
+smt().
 qed.
 
 
@@ -52,7 +52,7 @@ qed.
 op LessThan (n x : int) = 0 <= x < n.
 
 lemma inveq a b : 1%r / a = 1%r / b => a = b.
-smt(@Real).
+smt(divr0 divrK).
 qed.
 
 lemma d_uni_sum (d : int distr) n : is_uniform d 
