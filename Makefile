@@ -97,5 +97,7 @@ compile_and_run :
 	$(info This might take a while...)
 	make -C src/example run
 
+TESTS ?= proof
 
-
+run_test :
+	easycrypt runtest tests.config $(TESTS)
