@@ -32,17 +32,7 @@ lemma st2 x n (k : real) : x >= 0%r =>
  0%r <= n < 2%r^k =>
   x * (4%r^k / n - 1%r) <= x * r n k <= x* (4%r^k / n).
 move => x_pos [n_bound1  n_bound2].
-rewrite /r.
-split.
-case (x = 0%r). progress. 
-move => xnz.
-apply ler_pmul2l. smt(). 
-smt(@Real @RealExp). 
-move => _.
-case (x = 0%r). progress. 
-move => xnz.
-apply ler_pmul2l. smt(). 
-smt(@Real). 
+smt(st1).
 qed.
 
 
