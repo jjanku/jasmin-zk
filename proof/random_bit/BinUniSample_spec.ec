@@ -19,10 +19,7 @@ module SampleByte = {
 lemma sample_prob0 : phoare[SampleByte.run : true ==> res = 0 ] = (inv 2%r).
 proc. inline*.
 wp. rnd. skip. progress.
-rewrite duniformE.
-have ->: (undup (range 0 256)) = (range 0 256).
-smt(@List).
-have ->: (size (range 0 256)) = 256. smt(@List).
+rewrite dinterE size_filter /max /=.
 have ->: (count (fun (x : int) => x %% 2 = 0) (range 0 256)) = 128.
 do (rewrite range_ltn /=; first by trivial). 
 by rewrite /b2i;rewrite range_geq;simplify;done.
@@ -32,10 +29,7 @@ qed.
 lemma sample_prob1 : phoare[SampleByte.run : true ==> res <> 0  ] = (inv 2%r).
 proc. inline*.
 wp. rnd. skip. progress.
-rewrite duniformE.
-have ->: (undup (range 0 256)) = (range 0 256).
-smt(@List).
-have ->: (size (range 0 256)) = 256. smt(@List).
+rewrite dinterE size_filter /max /=.
 have ->: (count (fun (x : int) => x %% 2 <> 0) (range 0 256)) = 128.
 do (rewrite range_ltn /=; first by trivial). 
 by rewrite /b2i;rewrite range_geq;simplify;done.
