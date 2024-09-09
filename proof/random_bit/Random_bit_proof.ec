@@ -2,7 +2,6 @@
 require import AllCore IntDiv CoreMap List Distr DList.
 from Jasmin require import JModel.
 
-require import Array32.
 require BinUniSample_spec.
 require import Array1 WArray1.
 require import Finite ArrayFiniteness.
@@ -58,10 +57,10 @@ proof. rewrite /darray. apply dmap_ll; apply dlist_ll. smt(@W8). qed.
 local lemma supp_darray a:
  a \in darray <=> all (support W8.dword) (WArray1.to_list a).
 proof.
-rewrite /darray128 supp_dmap; split.
+rewrite /darray supp_dmap; split.
  move=> [x]; rewrite supp_dlist // => /> *.
  by rewrite WArray1.of_listK // /#.
-move=> H; exists (to_list a); rewrite supp_dlist // H Array256.size_to_list /=.
+move=> H; exists (to_list a); rewrite supp_dlist //.
 qed.
 
 
@@ -87,7 +86,6 @@ qed.
 local op byte_distr = dmap WArray1.darray h.
 
 local lemma byte_distr_uni : is_uniform byte_distr .
-rewrite /jsmD.
 apply dmap_uni_in_inj.
 progress. smt (h_inj).
 apply darray_uni.
@@ -95,13 +93,11 @@ qed.
 
 
 local lemma byte_distr_ll: is_lossless byte_distr.
-rewrite /jsmD.
 apply dmap_ll.
 apply darray_ll.
 qed.
 
 local lemma byte_distr_fu : is_full byte_distr .
-rewrite /jsmD.
 apply dmap_fu.
 smt (h_surj).
 apply darray_fu.
