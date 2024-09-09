@@ -128,7 +128,6 @@ local lemma zzz : size (to_seq (support byte_distr)) =  256.
 have : size all_256words1 = size (to_seq (support byte_distr)).
 apply uniq_size_uniq.
 apply uniq_to_seq.
-smt(@Distr byte_distr_uni).
 progress. apply all_256words1_full.
 have : x \in byte_distr.
 apply byte_distr_fu.

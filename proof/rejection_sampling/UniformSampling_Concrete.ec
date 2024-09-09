@@ -309,8 +309,8 @@ rewrite size_map. auto.
  have ->: size (map W64xN.valR (to_seq (support jsmD))) = size (to_seq (support D)). 
 apply qq.  
 rewrite map_inj_in_uniq. progress. clear H H0. smt(@W64xN).
-apply uniq_to_seq. smt(@Distr jsmdD_uni).
-apply uniq_to_seq. smt(@Distr jsmdD_uni).
+apply uniq_to_seq.
+apply uniq_to_seq.
 progress. 
 have : exists z, z \in (to_seq (support jsmD)) /\ W64xN.valR z = x. smt(@List).
 progress. 
