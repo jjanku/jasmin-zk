@@ -55,7 +55,7 @@ opam_pin :
 	opam update
 	opam pin add easycrypt https://github.com/EasyCrypt/easycrypt.git#$(EASYCRYPT_REVISION)
 	opam install easycrypt jasmin.$(JASMIN_VERSION) alt-ergo
-	why3 config detect
+	easycrypt why3config
 
 # Downloads files in eclib
 update_downloads :
