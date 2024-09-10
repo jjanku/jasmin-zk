@@ -39,16 +39,17 @@ u64[{self.nlimbs.number}] {const_name} = {{ {var_constant} }};
     def get_proof(self) -> str:
         proc_name = f"bn_set_{self.name}"
         const_name = f"bn_glob_{self.name}"
-        subblocks = "\n".join(f"have H: {i} = {i-1} + 1. by trivial. rewrite H. clear H. rewrite {self.nlimbs.module}.R.bnkS; 1: trivial. rewrite /dig. simplify."
-                                for i in range(self.nlimbs.number, 0, -1))
+        bn_module = self.nlimbs.module
 
         return f"""op {self.name} : int = {self.value}.
         
 
-lemma {const_name}_correct :  {self.nlimbs.module}.valR W64_SchnorrExtract.{const_name} = {self.name}.
+lemma {const_name}_correct :  {bn_module}.valR W64_SchnorrExtract.{const_name} = {self.name}.
 proof.
-{subblocks}
-rewrite {self.nlimbs.module}.R.bnk0 /{self.name}.
+have bnkS': forall k x, 0 < k => {bn_module}.R.bnk k x = {bn_module}.R.dig x (k - 1) + {bn_module}.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply ({bn_module}.R.bnkS (k-1)). smt().
+do {self.nlimbs.number}! (rewrite bnkS'; [trivial | simplify]).
+rewrite {bn_module}.R.bnk0 /{self.name}.
 trivial.
 qed.
 

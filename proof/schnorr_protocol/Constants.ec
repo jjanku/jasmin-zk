@@ -13,38 +13,9 @@ op p : int = 3231700607131100730033891392642382824881794124114023911284200975140
 
 lemma bn_glob_p_correct :  W64xN.valR W64_SchnorrExtract.bn_glob_p = p.
 proof.
-have H: 32 = 31 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 31 = 30 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 30 = 29 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 29 = 28 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 28 = 27 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 27 = 26 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 26 = 25 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 25 = 24 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 24 = 23 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 23 = 22 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 22 = 21 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 21 = 20 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 20 = 19 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 19 = 18 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 18 = 17 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 17 = 16 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 16 = 15 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 15 = 14 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 14 = 13 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 13 = 12 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 12 = 11 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 11 = 10 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 10 = 9 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 9 = 8 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 8 = 7 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 7 = 6 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 6 = 5 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 5 = 4 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 4 = 3 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 3 = 2 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 2 = 1 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 1 = 0 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
+have bnkS': forall k x, 0 < k => W64xN.R.bnk k x = W64xN.R.dig x (k - 1) + W64xN.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply (W64xN.R.bnkS (k-1)). smt().
+do 32! (rewrite bnkS'; [trivial | simplify]).
 rewrite W64xN.R.bnk0 /p.
 trivial.
 qed.
@@ -55,38 +26,9 @@ op q : int = 1615850303565550365016945696321191412440897062057011955642100487570
 
 lemma bn_glob_q_correct :  W64xN.valR W64_SchnorrExtract.bn_glob_q = q.
 proof.
-have H: 32 = 31 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 31 = 30 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 30 = 29 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 29 = 28 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 28 = 27 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 27 = 26 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 26 = 25 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 25 = 24 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 24 = 23 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 23 = 22 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 22 = 21 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 21 = 20 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 20 = 19 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 19 = 18 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 18 = 17 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 17 = 16 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 16 = 15 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 15 = 14 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 14 = 13 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 13 = 12 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 12 = 11 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 11 = 10 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 10 = 9 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 9 = 8 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 8 = 7 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 7 = 6 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 6 = 5 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 5 = 4 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 4 = 3 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 3 = 2 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 2 = 1 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 1 = 0 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
+have bnkS': forall k x, 0 < k => W64xN.R.bnk k x = W64xN.R.dig x (k - 1) + W64xN.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply (W64xN.R.bnkS (k-1)). smt().
+do 32! (rewrite bnkS'; [trivial | simplify]).
 rewrite W64xN.R.bnk0 /q.
 trivial.
 qed.
@@ -97,38 +39,9 @@ op g : int = 2.
 
 lemma bn_glob_g_correct :  W64xN.valR W64_SchnorrExtract.bn_glob_g = g.
 proof.
-have H: 32 = 31 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 31 = 30 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 30 = 29 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 29 = 28 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 28 = 27 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 27 = 26 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 26 = 25 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 25 = 24 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 24 = 23 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 23 = 22 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 22 = 21 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 21 = 20 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 20 = 19 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 19 = 18 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 18 = 17 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 17 = 16 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 16 = 15 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 15 = 14 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 14 = 13 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 13 = 12 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 12 = 11 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 11 = 10 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 10 = 9 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 9 = 8 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 8 = 7 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 7 = 6 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 6 = 5 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 5 = 4 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 4 = 3 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 3 = 2 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 2 = 1 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 1 = 0 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
+have bnkS': forall k x, 0 < k => W64xN.R.bnk k x = W64xN.R.dig x (k - 1) + W64xN.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply (W64xN.R.bnkS (k-1)). smt().
+do 32! (rewrite bnkS'; [trivial | simplify]).
 rewrite W64xN.R.bnk0 /g.
 trivial.
 qed.
@@ -139,70 +52,9 @@ op bp : int = 323170060713110073010908394509160756720746378944983304703094916148
 
 lemma bn_glob_bp_correct :  W64x2N.valR W64_SchnorrExtract.bn_glob_bp = bp.
 proof.
-have H: 64 = 63 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 63 = 62 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 62 = 61 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 61 = 60 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 60 = 59 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 59 = 58 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 58 = 57 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 57 = 56 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 56 = 55 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 55 = 54 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 54 = 53 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 53 = 52 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 52 = 51 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 51 = 50 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 50 = 49 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 49 = 48 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 48 = 47 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 47 = 46 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 46 = 45 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 45 = 44 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 44 = 43 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 43 = 42 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 42 = 41 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 41 = 40 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 40 = 39 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 39 = 38 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 38 = 37 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 37 = 36 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 36 = 35 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 35 = 34 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 34 = 33 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 33 = 32 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 32 = 31 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 31 = 30 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 30 = 29 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 29 = 28 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 28 = 27 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 27 = 26 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 26 = 25 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 25 = 24 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 24 = 23 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 23 = 22 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 22 = 21 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 21 = 20 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 20 = 19 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 19 = 18 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 18 = 17 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 17 = 16 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 16 = 15 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 15 = 14 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 14 = 13 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 13 = 12 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 12 = 11 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 11 = 10 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 10 = 9 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 9 = 8 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 8 = 7 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 7 = 6 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 6 = 5 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 5 = 4 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 4 = 3 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 3 = 2 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 2 = 1 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 1 = 0 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
+have bnkS': forall k x, 0 < k => W64x2N.R.bnk k x = W64x2N.R.dig x (k - 1) + W64x2N.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply (W64x2N.R.bnkS (k-1)). smt().
+do 64! (rewrite bnkS'; [trivial | simplify]).
 rewrite W64x2N.R.bnk0 /bp.
 trivial.
 qed.
@@ -213,70 +65,9 @@ op bq : int = 646340121426220146021816789018321513441492757889966609406189832297
 
 lemma bn_glob_bq_correct :  W64x2N.valR W64_SchnorrExtract.bn_glob_bq = bq.
 proof.
-have H: 64 = 63 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 63 = 62 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 62 = 61 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 61 = 60 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 60 = 59 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 59 = 58 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 58 = 57 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 57 = 56 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 56 = 55 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 55 = 54 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 54 = 53 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 53 = 52 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 52 = 51 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 51 = 50 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 50 = 49 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 49 = 48 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 48 = 47 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 47 = 46 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 46 = 45 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 45 = 44 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 44 = 43 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 43 = 42 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 42 = 41 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 41 = 40 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 40 = 39 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 39 = 38 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 38 = 37 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 37 = 36 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 36 = 35 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 35 = 34 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 34 = 33 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 33 = 32 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 32 = 31 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 31 = 30 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 30 = 29 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 29 = 28 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 28 = 27 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 27 = 26 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 26 = 25 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 25 = 24 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 24 = 23 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 23 = 22 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 22 = 21 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 21 = 20 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 20 = 19 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 19 = 18 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 18 = 17 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 17 = 16 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 16 = 15 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 15 = 14 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 14 = 13 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 13 = 12 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 12 = 11 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 11 = 10 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 10 = 9 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 9 = 8 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 8 = 7 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 7 = 6 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 6 = 5 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 5 = 4 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 4 = 3 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 3 = 2 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 2 = 1 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 1 = 0 + 1. by trivial. rewrite H. clear H. rewrite W64x2N.R.bnkS; 1: trivial. rewrite /dig. simplify.
+have bnkS': forall k x, 0 < k => W64x2N.R.bnk k x = W64x2N.R.dig x (k - 1) + W64x2N.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply (W64x2N.R.bnkS (k-1)). smt().
+do 64! (rewrite bnkS'; [trivial | simplify]).
 rewrite W64x2N.R.bnk0 /bq.
 trivial.
 qed.
@@ -287,38 +78,9 @@ op ex_w : int = 1356207494223269829817909971509758466974361676201000186453329999
 
 lemma bn_glob_ex_w_correct :  W64xN.valR W64_SchnorrExtract.bn_glob_ex_w = ex_w.
 proof.
-have H: 32 = 31 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 31 = 30 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 30 = 29 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 29 = 28 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 28 = 27 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 27 = 26 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 26 = 25 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 25 = 24 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 24 = 23 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 23 = 22 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 22 = 21 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 21 = 20 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 20 = 19 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 19 = 18 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 18 = 17 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 17 = 16 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 16 = 15 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 15 = 14 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 14 = 13 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 13 = 12 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 12 = 11 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 11 = 10 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 10 = 9 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 9 = 8 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 8 = 7 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 7 = 6 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 6 = 5 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 5 = 4 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 4 = 3 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 3 = 2 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 2 = 1 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 1 = 0 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
+have bnkS': forall k x, 0 < k => W64xN.R.bnk k x = W64xN.R.dig x (k - 1) + W64xN.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply (W64xN.R.bnkS (k-1)). smt().
+do 32! (rewrite bnkS'; [trivial | simplify]).
 rewrite W64xN.R.bnk0 /ex_w.
 trivial.
 qed.
@@ -329,38 +91,9 @@ op ex_s : int = 1744810556469774323559620077990506088614010230158983697487083699
 
 lemma bn_glob_ex_s_correct :  W64xN.valR W64_SchnorrExtract.bn_glob_ex_s = ex_s.
 proof.
-have H: 32 = 31 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 31 = 30 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 30 = 29 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 29 = 28 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 28 = 27 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 27 = 26 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 26 = 25 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 25 = 24 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 24 = 23 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 23 = 22 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 22 = 21 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 21 = 20 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 20 = 19 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 19 = 18 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 18 = 17 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 17 = 16 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 16 = 15 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 15 = 14 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 14 = 13 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 13 = 12 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 12 = 11 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 11 = 10 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 10 = 9 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 9 = 8 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 8 = 7 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 7 = 6 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 6 = 5 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 5 = 4 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 4 = 3 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 3 = 2 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 2 = 1 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
-have H: 1 = 0 + 1. by trivial. rewrite H. clear H. rewrite W64xN.R.bnkS; 1: trivial. rewrite /dig. simplify.
+have bnkS': forall k x, 0 < k => W64xN.R.bnk k x = W64xN.R.dig x (k - 1) + W64xN.R.bnk (k - 1) x.
+  move => k x k_gt_0. apply (W64xN.R.bnkS (k-1)). smt().
+do 32! (rewrite bnkS'; [trivial | simplify]).
 rewrite W64xN.R.bnk0 /ex_s.
 trivial.
 qed.
