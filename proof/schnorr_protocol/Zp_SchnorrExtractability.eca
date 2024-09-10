@@ -97,7 +97,7 @@ case (sz = zero). move => s_is_zero.
   pose ss := sz.
   byphoare (_: arg = sz ==> _). proc. hoare.
   inline*. wp.  call (_:true). wp. rnd. call(_:true). skip. progress. rewrite s_is_zero. 
-  have ->: ZModpField.exp zero  q = zero. 
+  have ->: exp zero  q = zero.
     rewrite (ZModpField.expr0z q). smt(q_prime).
   smt(@Zp). auto. auto. simplify.
   have ->: 0%r ^ 2 = 0%r. smt(@Real). 
@@ -119,7 +119,7 @@ call {1} P_response_ll.
 call {2} P_response_ll. auto.
 rnd {1}.  rnd{2}.
 wp. skip. progress. smt(@Distr challenges_list_zp_size). smt(@Distr challenges_list_zp_size).
-have q : ZModpField.exp g result0  = zero.
+have q : exp g result0  = zero.
 rewrite H4. rewrite H. simplify.  
 smt(@Zp @ZModpField g_unit).
 smt(@Zp @ZModpField g_unit).
