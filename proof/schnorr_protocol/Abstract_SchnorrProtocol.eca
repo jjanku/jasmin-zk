@@ -565,7 +565,7 @@ seq 2 1 : (={glob V,b',z, Ny,w, glob ZK.Hyb.Count, glob ZK.Hyb.HybOrcl}
 call (exss ya wa). 
 elim rewindable_V_plus2.
 move => fA [s1 [s2 [s3]]] [s4 [ s5 [s6 s7]]]. 
-exists* (glob V){1}. elim*. progress.
+exists* (glob V){1}. elim* => V_L. progress.
 call {1} (s2 V_L).
 skip. progress. 
 seq 1 1 : (={glob V,b',z,Ny,w, glob ZK.Hyb.Count, glob ZK.Hyb.HybOrcl} 
