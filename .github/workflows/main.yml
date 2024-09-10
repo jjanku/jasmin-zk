@@ -41,5 +41,5 @@ jobs:
         run: opam exec -- easycrypt why3config
 
       - name: check all
-        run: ECARGS=-script TIMEOUT=60 opam exec -- make check_all
+        run: opam exec -- make run_test
 
