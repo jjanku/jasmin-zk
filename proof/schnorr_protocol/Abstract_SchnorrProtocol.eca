@@ -535,7 +535,6 @@ have ->: (asint rL + asint wa * - asint bb{2})
 auto.
 rewrite addE.
 rewrite - pow_mod.
-search CG.(^).
 rewrite expD. rewrite expD.
 congr.
 rewrite oppE. 

@@ -38,7 +38,6 @@ lemma expm_stepS i : 0 < i =>  expm_step i
  =  expm_step_acc (W64.of_int (2048 - i))
     ++ expm_step (i-1). rewrite /expm_step.
 progress.
-search iteri.
 have ->: i = (i-1)+1. smt().
 rewrite iteriS. smt(). simplify. auto. qed.
 

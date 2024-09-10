@@ -267,7 +267,6 @@ have -> : (Zps.(^) HV.s{2} q) <> (Sub.insubd one).
  have->: HV.s{2} = Sub.insubd (Sub.val HV.s{2}).
  smt(@Sub).
 rewrite lll. smt(@Sub).
-print aaa.
 smt(@Sub @ZModpField aaa @Zp).
 smt(@Sub). 
 qed.
